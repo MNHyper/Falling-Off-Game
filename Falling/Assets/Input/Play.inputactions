@@ -4,8 +4,30 @@
         {
             "name": "Player",
             "id": "c206cb38-8b76-492f-82de-adc0353e7bd0",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "PassThrough",
+                    "id": "d59bac8b-f7cf-49d7-8483-33cec6989225",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "44b98690-35a7-4d1d-aa55-bf90a1e943d3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "UI",
