@@ -16,15 +16,15 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpPower;
-    [SerializeField] private float fullingSpeed;
-    [SerializeField] private float jumpTimer;
+    private float jumpBufferTime = 0.2f;
+    private float jumpBufferCounter;
 
 
     private bool mustPatrol;
     private bool mustTurn;
     private bool grounded;
     private bool jumping;
-    private bool jumpPoint = false;
+    private bool doubleJump;
 
 
     // Start is called before the first frame update
@@ -41,7 +41,8 @@ public class PlayerControl : MonoBehaviour
             Patrol();
         }
 
-        JumpDown();
+        Debug.Log(doubleJump);
+
     }
 
     private void FixedUpdate()
@@ -63,21 +64,50 @@ public class PlayerControl : MonoBehaviour
     {
         jumping = value.isPressed;
 
-        if (grounded && jumping)
+        if(grounded && !jumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            jumpPoint = false;
-            StartCoroutine(StopJump());
+            doubleJump = false;
         }
-    }
 
-    private void JumpDown()
-    {
-        if (grounded && jumpPoint == true)
+        jumping = value.isPressed;
+
+        if (jumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            jumpPoint = false;
+            jumpBufferCounter = jumpBufferTime;
+
+            //animator.SetBool("Jumping", true);
+            //FindObjectOfType<AudioManager>().Play("Jump");
         }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+            //animator.SetBool("Jumping", false);
+        }
+
+
+        if (jumpBufferCounter > 0f)
+        {
+            rb.velocity += new Vector2(0f, jumpPower);
+
+            jumpBufferCounter = 0f;
+
+            doubleJump = true;
+        }
+
+        if (doubleJump)
+        {
+            rb.velocity += new Vector2(0f, jumpPower);
+
+            jumpBufferCounter = 0f;
+
+            doubleJump = false;
+        }
+
+        if (!jumping && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+
     }
 
     private void Patrol()
@@ -107,20 +137,6 @@ public class PlayerControl : MonoBehaviour
         Gizmos.DrawWireSphere(wallCheckPos.position, 0.1f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
-    }
-
-    private IEnumerator StopJump()
-    {
-        yield return new WaitForSeconds(jumpTimer);
-        jumping = false;
-
-        if (!grounded && !jumping)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, fullingSpeed);
-            jumpPoint = true;
-        }
-
-
     }
 
 }
