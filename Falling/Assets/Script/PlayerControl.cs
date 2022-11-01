@@ -13,24 +13,32 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform wallCheckPos;
     [SerializeField] private LayerMask wallLayer;
+    private bool mustPatrol;
+    private bool mustTurn;
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpPower;
     private float jumpBufferTime = 0.2f;
     private float jumpBufferCounter;
-
-
-    private bool mustPatrol;
-    private bool mustTurn;
-    private bool grounded;
     private bool jumping;
     private bool doubleJump;
+    private bool grounded;
+
+    [Header("Day Night Variables")]
+    [SerializeField] private GameObject dayPlayer;
+    [SerializeField] private GameObject nightPlayer;
+    [SerializeField] private float cycleTime;
+    private bool dayCycle;
+    private bool day;
+    private bool night;
 
 
     // Start is called before the first frame update
     private void Start()
     {
         mustPatrol = true;
+        day = false;
+        night = true;
     }
 
     // Update is called once per frame
@@ -41,8 +49,6 @@ public class PlayerControl : MonoBehaviour
             Patrol();
         }
 
-        Debug.Log(doubleJump);
-
     }
 
     private void FixedUpdate()
@@ -52,6 +58,31 @@ public class PlayerControl : MonoBehaviour
         if (mustPatrol)
         {
             mustTurn = Physics2D.OverlapCircle(wallCheckPos.position, 0.1f, wallLayer);
+        }
+    }
+
+    private void OnDayNight(InputValue value)
+    {
+        dayCycle = value.isPressed;
+
+        if (dayCycle && night == false)
+        {
+            dayPlayer.SetActive(true);
+            nightPlayer.SetActive(false);
+
+            StartCoroutine(DayTime());
+
+            Debug.Log("day");
+        }
+
+        if (dayCycle && day == false)
+        {
+            dayPlayer.SetActive(false);
+            nightPlayer.SetActive(true);
+
+            StartCoroutine(NightTime());
+
+            Debug.Log("night");
         }
     }
 
@@ -73,7 +104,12 @@ public class PlayerControl : MonoBehaviour
 
         if (jumping)
         {
-            jumpBufferCounter = jumpBufferTime;
+            if(grounded || doubleJump)
+            {
+                jumpBufferCounter = jumpBufferTime;
+
+                doubleJump = !doubleJump;
+            }
 
             //animator.SetBool("Jumping", true);
             //FindObjectOfType<AudioManager>().Play("Jump");
@@ -85,22 +121,11 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        if (jumpBufferCounter > 0f)
+        if (jumpBufferCounter > 0f || doubleJump)
         {
             rb.velocity += new Vector2(0f, jumpPower);
 
             jumpBufferCounter = 0f;
-
-            doubleJump = true;
-        }
-
-        if (doubleJump)
-        {
-            rb.velocity += new Vector2(0f, jumpPower);
-
-            jumpBufferCounter = 0f;
-
-            doubleJump = false;
         }
 
         if (!jumping && rb.velocity.y > 0f)
@@ -137,6 +162,20 @@ public class PlayerControl : MonoBehaviour
         Gizmos.DrawWireSphere(wallCheckPos.position, 0.1f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
+    }
+
+    private IEnumerator DayTime()
+    {
+        yield return new WaitForSeconds(cycleTime);
+        day = false;
+        night = true;
+    }
+
+    private IEnumerator NightTime()
+    {
+        yield return new WaitForSeconds(cycleTime);
+        day = true;
+        night = false;
     }
 
 }
