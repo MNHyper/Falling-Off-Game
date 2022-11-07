@@ -29,8 +29,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject nightPlayer;
     [SerializeField] private float cycleTime;
     private bool dayCycle;
-    private bool day;
-    private bool night;
+    public bool day;
+    public bool night;
 
 
     // Start is called before the first frame update
@@ -64,6 +64,7 @@ public class PlayerControl : MonoBehaviour
     private void OnDayNight(InputValue value)
     {
         dayCycle = value.isPressed;
+        Debug.Log("Cycle");
 
         if (dayCycle && night == false)
         {
@@ -71,8 +72,6 @@ public class PlayerControl : MonoBehaviour
             nightPlayer.SetActive(false);
 
             StartCoroutine(DayTime());
-
-            Debug.Log("day");
         }
 
         if (dayCycle && day == false)
@@ -81,8 +80,6 @@ public class PlayerControl : MonoBehaviour
             nightPlayer.SetActive(true);
 
             StartCoroutine(NightTime());
-
-            Debug.Log("night");
         }
     }
 
@@ -94,8 +91,9 @@ public class PlayerControl : MonoBehaviour
     private void OnJump(InputValue value)
     {
         jumping = value.isPressed;
+        Debug.Log("jump");
 
-        if(grounded && !jumping)
+        if (grounded && !jumping)
         {
             doubleJump = false;
         }
