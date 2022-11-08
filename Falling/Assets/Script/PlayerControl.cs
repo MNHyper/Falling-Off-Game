@@ -64,7 +64,6 @@ public class PlayerControl : MonoBehaviour
     private void OnDayNight(InputValue value)
     {
         dayCycle = value.isPressed;
-        Debug.Log("Cycle");
 
         if (dayCycle && night == false)
         {
@@ -91,7 +90,6 @@ public class PlayerControl : MonoBehaviour
     private void OnJump(InputValue value)
     {
         jumping = value.isPressed;
-        Debug.Log("jump");
 
         if (grounded && !jumping)
         {

@@ -4,14 +4,42 @@ using UnityEngine;
 
 public class objectScript : MonoBehaviour
 {
+    public PlayerControl player;
+    [SerializeField] GameObject dayTime;
+    [SerializeField] GameObject nightTime;
     public float speed;
-    void Update()
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
     {
         transform.position += transform.up * speed * Time.deltaTime;
-
-        if(transform.position.y >= 8.55)
+        Cycle();
+        if (transform.position.y >= 8.55)
         {
              Destroy(gameObject);
         }
+        Debug.Log(player.day);
+        Debug.Log(player.night);
     }
+
+    private void Cycle()
+    {
+        if (player.night == false)
+        {
+            dayTime.SetActive(true);
+            nightTime.SetActive(false);
+        }
+
+        if (player.day == false)
+        {
+            dayTime.SetActive(false);
+            nightTime.SetActive(true);
+        }
+
+    }
+
 }

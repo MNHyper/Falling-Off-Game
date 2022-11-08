@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
+    [SerializeField] private PlayerControl player;
     public float TimeToSpawn;
     float timer;
     public List<GameObject> ObjectPrefabs = new List<GameObject>();
@@ -16,7 +16,8 @@ public class Spawner : MonoBehaviour
 
             int random = Random.Range(0, ObjectPrefabs.Count);
 
-            Instantiate(ObjectPrefabs[random], transform.position, transform.rotation);
+            var block = Instantiate(ObjectPrefabs[random], transform.position, transform.rotation);
+            block.GetComponent<objectScript>().player = player;
         }
     }
 }
