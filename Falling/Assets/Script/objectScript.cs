@@ -22,8 +22,6 @@ public class objectScript : MonoBehaviour
         {
              Destroy(gameObject);
         }
-        Debug.Log(player.day);
-        Debug.Log(player.night);
     }
 
     private void Cycle()

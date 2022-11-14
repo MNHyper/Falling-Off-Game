@@ -27,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     [Header("Day Night Variables")]
     [SerializeField] private GameObject dayPlayer;
     [SerializeField] private GameObject nightPlayer;
+    [SerializeField] private GameObject dayBackRound;
+    [SerializeField] private GameObject nightBackRound;
     [SerializeField] private float cycleTime;
     private bool dayCycle;
     public bool day;
@@ -68,7 +70,9 @@ public class PlayerControl : MonoBehaviour
         if (dayCycle && night == false)
         {
             dayPlayer.SetActive(true);
+            dayBackRound.SetActive(true);
             nightPlayer.SetActive(false);
+            nightBackRound.SetActive(false);
 
             StartCoroutine(DayTime());
         }
@@ -76,7 +80,9 @@ public class PlayerControl : MonoBehaviour
         if (dayCycle && day == false)
         {
             dayPlayer.SetActive(false);
+            dayBackRound.SetActive(false);
             nightPlayer.SetActive(true);
+            nightBackRound.SetActive(true);
 
             StartCoroutine(NightTime());
         }
