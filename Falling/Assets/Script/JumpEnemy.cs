@@ -10,10 +10,8 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform wallCheckPos;
     [SerializeField] private LayerMask wallLayer;
-    float timer;
     private bool mustPatrol;
     private bool mustTurn;
-    private bool onWall;
 
     [Header("Day Night Variables")]
     public PlayerControl player;
