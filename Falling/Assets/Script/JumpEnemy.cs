@@ -10,19 +10,24 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform wallCheckPos;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float topSpeed;
+    [SerializeField] private float slowSpeed;
     private bool mustPatrol;
     private bool mustTurn;
+    private Vector3 enemyScale;
+    private float speed;
 
     [Header("Day Night Variables")]
     public PlayerControl player;
     [SerializeField] GameObject dayTime;
     [SerializeField] GameObject nightTime;
-    public float speed;
 
     // Start is called before the first frame update
     void Start()
     {
         mustPatrol = true;
+        speed = Random.Range(topSpeed, slowSpeed);
+
     }
 
     // Update is called once per frame
@@ -45,7 +50,7 @@ public class JumpEnemy : MonoBehaviour
     {
         if (mustPatrol == true)
         {
-            mustTurn = Physics2D.OverlapCircle(wallCheckPos.position, 0.3f, wallLayer);
+            mustTurn = Physics2D.OverlapCircle(wallCheckPos.position, 0.1f, wallLayer);
         }
     }
 
@@ -73,9 +78,9 @@ public class JumpEnemy : MonoBehaviour
     {
         mustPatrol = false;
         mustTurn = !mustTurn;
-        Vector3 PlayerScale = transform.localScale;
-        PlayerScale.x *= -1;
-        transform.localScale = PlayerScale;
+        enemyScale = transform.localScale;
+        enemyScale.x *= -1;
+        transform.localScale = enemyScale;
         moveSpeed *= -1;
         StartCoroutine(StopMove());
     }

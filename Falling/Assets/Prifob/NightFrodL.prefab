@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2896074313805018947}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.015, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.015, z: 0}
   m_LocalScale: {x: 1, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2896074314302476122}
   - component: {fileID: 2896074314302476121}
   m_Layer: 0
-  m_Name: NightFrod
+  m_Name: NightFrodL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,17 +79,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad71d4809f0ef418c69debef3c26f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
+  moveSpeed: -100
   onWallTime: 1
   rb: {fileID: 2896074314302476121}
   wallCheckPos: {fileID: 2896074313805019004}
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
+  topSpeed: 2
+  slowSpeed: 4
   player: {fileID: 0}
   dayTime: {fileID: 2896074315430518617}
   nightTime: {fileID: 2896074315473469339}
-  speed: 1
 --- !u!50 &2896074314302476121
 Rigidbody2D:
   serializedVersion: 4
