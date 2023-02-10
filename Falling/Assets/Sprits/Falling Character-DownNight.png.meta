@@ -139,7 +139,65 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Falling Character-DownNight_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105dab4596aa2964cadeb8186c0e718f
+      internalID: -1126385122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Falling Character-DownNight_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4963662309ef1ff488b7483c7599b923
+      internalID: 1562753355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +208,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Falling Character-DownNight_0: -1126385122
+      Falling Character-DownNight_1: 1562753355
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

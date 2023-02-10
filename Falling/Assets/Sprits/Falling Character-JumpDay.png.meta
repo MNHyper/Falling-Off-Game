@@ -139,7 +139,152 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Falling Character-JumpDay_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c828fdb3d6dcd9b45a178977a47bec8b
+      internalID: 749013234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Falling Character-JumpDay_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0539f065f3d9fc44e9bdf33c9c9af9af
+      internalID: -2138920176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Falling Character-JumpDay_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3492c93b8c8b224489be77b17590486f
+      internalID: -895967000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Falling Character-JumpDay_3
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66773a1048ceb1a47b6e14358f8111a9
+      internalID: 657174121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Falling Character-JumpDay_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -9}
+        - {x: 9, y: 9}
+        - {x: -9, y: 9}
+        - {x: -9, y: -9}
+      physicsShape:
+      - - {x: 0, y: -9}
+        - {x: 9, y: 0}
+        - {x: 0, y: 9}
+        - {x: -9, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fea84633e688c143a771771c9eaf795
+      internalID: 938533703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +295,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Falling Character-JumpDay_0: 749013234
+      Falling Character-JumpDay_2: -895967000
+      Falling Character-JumpDay_1: -2138920176
+      Falling Character-JumpDay_3: 657174121
+      Falling Character-JumpDay_4: 938533703
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

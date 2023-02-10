@@ -34,6 +34,10 @@ public class PlayerControl : MonoBehaviour
     public bool day;
     public bool night;
 
+    [Header("Animator")]
+    [SerializeField] private Animator dayAnimator;
+    [SerializeField] private Animator nightAnimator;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -56,6 +60,30 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         IsGrounded();
+
+        if(grounded == true)
+        {
+            dayAnimator.SetBool("Grounded", true);
+            nightAnimator.SetBool("Grounded", true);
+        }
+
+        if (jumping)
+        {
+            dayAnimator.SetTrigger("Jump");
+            nightAnimator.SetTrigger("Jump");
+
+            if (doubleJump == true && grounded == false)
+            {
+                dayAnimator.SetTrigger("Doble Jump");
+                nightAnimator.SetTrigger("Doble Jump");
+            }
+        }
+
+        if(jumping == false)
+        {
+            dayAnimator.SetBool("Not D jump", true);
+            nightAnimator.SetBool("Not D jump", true);
+        }
 
         if (mustPatrol)
         {
@@ -119,7 +147,6 @@ public class PlayerControl : MonoBehaviour
         else
         {
             jumpBufferCounter -= Time.deltaTime;
-            //animator.SetBool("Jumping", false);
         }
 
 
