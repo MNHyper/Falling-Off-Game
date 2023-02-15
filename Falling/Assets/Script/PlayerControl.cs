@@ -67,24 +67,6 @@ public class PlayerControl : MonoBehaviour
             nightAnimator.SetBool("Grounded", true);
         }
 
-        if (jumping)
-        {
-            dayAnimator.SetTrigger("Jump");
-            nightAnimator.SetTrigger("Jump");
-
-            if (doubleJump == true && grounded == false)
-            {
-                dayAnimator.SetTrigger("Doble Jump");
-                nightAnimator.SetTrigger("Doble Jump");
-            }
-        }
-
-        if(jumping == false)
-        {
-            dayAnimator.SetBool("Not D jump", true);
-            nightAnimator.SetBool("Not D jump", true);
-        }
-
         if (mustPatrol)
         {
             mustTurn = Physics2D.OverlapCircle(wallCheckPos.position, 0.1f, wallLayer);
@@ -134,11 +116,15 @@ public class PlayerControl : MonoBehaviour
 
         if (jumping)
         {
-            if(grounded || doubleJump)
+            dayAnimator.SetTrigger("Jump");
+            nightAnimator.SetTrigger("Jump");
+            if (grounded || doubleJump)
             {
                 jumpBufferCounter = jumpBufferTime;
 
                 doubleJump = !doubleJump;
+                dayAnimator.SetTrigger("Doble Jump");
+                nightAnimator.SetTrigger("Doble Jump");
             }
 
             //animator.SetBool("Jumping", true);
