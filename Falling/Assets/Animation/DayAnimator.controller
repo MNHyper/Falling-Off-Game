@@ -93,19 +93,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Doble Jump
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -265,10 +265,10 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2514989395567439906}
-    m_Position: {x: 360, y: -10, z: 0}
+    m_Position: {x: 240, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6086893074617958649}
-    m_Position: {x: 490, y: -140, z: 0}
+    m_Position: {x: 530, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7741681870090733757}
     m_Position: {x: 530, y: 110, z: 0}

@@ -10,6 +10,7 @@ public class JumpSpawner : MonoBehaviour
     private float TimeToSpawn;
     float timer;
     public List<GameObject> ObjectPrefabs = new List<GameObject>();
+
     void Update()
     {
         TimeToSpawn = Random.Range(minSpawnTime, maxSpawnTime);

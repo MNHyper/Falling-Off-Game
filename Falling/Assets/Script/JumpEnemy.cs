@@ -105,7 +105,6 @@ public class JumpEnemy : MonoBehaviour
             dayTime.SetActive(false);
             nightTime.SetActive(true);
         }
-
     }
 
     private IEnumerator StopMove()
