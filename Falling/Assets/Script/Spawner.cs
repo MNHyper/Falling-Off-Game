@@ -5,12 +5,15 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private PlayerControl player;
+    [SerializeField] private float minSpawnTime;
+    [SerializeField] private float maxSpawnTime;
     private float TimeToSpawn;
-    float timer;
+    private float timer;
     public List<GameObject> ObjectPrefabs = new List<GameObject>();
-    void Update()
+
+    private void Update()
     {
-        TimeToSpawn = Random.Range(0.5f, 2f);
+        TimeToSpawn = Random.Range(minSpawnTime, maxSpawnTime);
 
         if (Time.time > timer)
         {

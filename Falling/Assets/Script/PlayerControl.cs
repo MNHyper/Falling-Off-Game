@@ -50,23 +50,17 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        IsGrounded();
         if (mustPatrol)
         {
             Patrol();
         }
-
+        dayAnimator.SetBool("Grounded", grounded);
+        nightAnimator.SetBool("Grounded", grounded);
     }
 
     private void FixedUpdate()
     {
-        IsGrounded();
-
-        if(grounded == true)
-        {
-            dayAnimator.SetBool("Grounded", true);
-            nightAnimator.SetBool("Grounded", true);
-        }
-
         if (mustPatrol)
         {
             mustTurn = Physics2D.OverlapCircle(wallCheckPos.position, 0.1f, wallLayer);
@@ -100,7 +94,7 @@ public class PlayerControl : MonoBehaviour
 
     private void IsGrounded()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        grounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
 
     private void OnJump(InputValue value)
