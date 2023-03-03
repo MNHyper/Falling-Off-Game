@@ -22,6 +22,10 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField] GameObject dayTime;
     [SerializeField] GameObject nightTime;
 
+    [Header("Animator")]
+    [SerializeField] private Animator dayAnimator;
+    [SerializeField] private Animator nightAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,10 +60,16 @@ public class JumpEnemy : MonoBehaviour
 
     private void Patrol()
     {
-        if (mustTurn)
+        if (mustTurn )
         {
             Flip();
-
+            dayAnimator.SetBool("Grounded", true);
+            nightAnimator.SetBool("Grounded", true);
+        }
+        else
+        {
+            dayAnimator.SetBool("Grounded", false);
+            nightAnimator.SetBool("Grounded", false);
         }
 
         if (mustPatrol == true)

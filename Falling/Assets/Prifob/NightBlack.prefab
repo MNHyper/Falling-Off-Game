@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3329373956668263305}
   - component: {fileID: 3329373956668263306}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: day
   m_TagString: DayBlock
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 177486603096450717}
   - component: {fileID: 8333566363564125252}
   - component: {fileID: 491327596233019953}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: night
   m_TagString: DayBlock
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -205,9 +205,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3055591001960792059}
   - component: {fileID: 4617800978088504736}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: NightBlack
-  m_TagString: DayBlock
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

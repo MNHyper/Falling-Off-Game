@@ -91,6 +91,8 @@ MonoBehaviour:
   player: {fileID: 0}
   dayTime: {fileID: 2896074315430518617}
   nightTime: {fileID: 2896074315473469339}
+  dayAnimator: {fileID: 8541492769757715174}
+  nightAnimator: {fileID: 8073969140801416146}
 --- !u!50 &2896074314302476121
 Rigidbody2D:
   serializedVersion: 4
