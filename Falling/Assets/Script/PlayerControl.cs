@@ -18,7 +18,8 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Jump Variables")]
     [SerializeField] private float jumpPower;
-    private float jumpBufferTime = 0.2f;
+    [SerializeField] private float forwordPower;
+    private float jumpBufferTime = 0.3f;
     private float jumpBufferCounter;
     private bool jumping;
     private bool doubleJump;
@@ -29,6 +30,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject nightPlayer;
     [SerializeField] private GameObject dayBackRound;
     [SerializeField] private GameObject nightBackRound;
+    [SerializeField] private GameObject dayTimer;
+    [SerializeField] private GameObject NightTimer;
     [SerializeField] private float cycleTime;
     private bool dayCycle;
     public bool day;
@@ -75,8 +78,10 @@ public class PlayerControl : MonoBehaviour
         {
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
+            dayTimer.SetActive(true);
             nightPlayer.SetActive(false);
             nightBackRound.SetActive(false);
+            NightTimer.SetActive(false);
 
             StartCoroutine(DayTime());
         }
@@ -85,8 +90,10 @@ public class PlayerControl : MonoBehaviour
         {
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
+            dayTimer.SetActive(false);
             nightPlayer.SetActive(true);
             nightBackRound.SetActive(true);
+            NightTimer.SetActive(true);
 
             StartCoroutine(NightTime());
         }
@@ -132,7 +139,7 @@ public class PlayerControl : MonoBehaviour
 
         if (jumpBufferCounter > 0f || doubleJump)
         {
-            rb.velocity += new Vector2(0f, jumpPower);
+            rb.velocity += new Vector2(forwordPower, jumpPower);
 
             jumpBufferCounter = 0f;
         }

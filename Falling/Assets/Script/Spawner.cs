@@ -7,6 +7,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] private PlayerControl player;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
+    [SerializeField] private float minSpeedUp;
+    [SerializeField] private float maxSpeedUp;
+    public float minLimit;
+    public float maxLimit;
     private float TimeToSpawn;
     private float timer;
     public List<GameObject> ObjectPrefabs = new List<GameObject>();
@@ -14,6 +18,15 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         TimeToSpawn = Random.Range(minSpawnTime, maxSpawnTime);
+        if (minSpawnTime > minLimit)
+        {
+            minSpawnTime += minSpeedUp;
+        }
+        if (maxSpawnTime > maxLimit)
+        {
+            maxSpawnTime += maxSpeedUp;
+        }
+
 
         if (Time.time > timer)
         {

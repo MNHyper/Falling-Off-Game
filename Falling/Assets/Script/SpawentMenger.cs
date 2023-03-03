@@ -5,12 +5,15 @@ using UnityEngine;
 public class SpawentMenger : MonoBehaviour
 {
     public GameObject[] spawners;
-    public float spawneTime;
+    public float spawneTimeMin;
+    public float spawneTimeMax;
+    private float spawneTime;
 
     // Update is called once per frame
     void Update()
     {
-        if(spawneTime < Time.time)
+        spawneTime = Random.Range(spawneTimeMin, spawneTimeMax);
+        if (spawneTime < Time.time)
         {
             ActiveSpawners(spawners);
             this.enabled = false;

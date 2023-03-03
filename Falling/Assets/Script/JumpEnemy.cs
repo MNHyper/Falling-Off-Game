@@ -87,11 +87,6 @@ public class JumpEnemy : MonoBehaviour
     private void Flip()
     {
         mustPatrol = false;
-        mustTurn = !mustTurn;
-        enemyScale = transform.localScale;
-        enemyScale.x *= -1;
-        transform.localScale = enemyScale;
-        moveSpeed *= -1;
         StartCoroutine(StopMove());
     }
 
@@ -121,6 +116,12 @@ public class JumpEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(onWallTime);
         mustPatrol = true;
+        mustTurn = !mustTurn;
+        enemyScale = transform.localScale;
+        enemyScale.x *= -1;
+        transform.localScale = enemyScale;
+        moveSpeed *= -1;
+
     }
 
 }
