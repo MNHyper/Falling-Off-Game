@@ -41,6 +41,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Animator dayAnimator;
     [SerializeField] private Animator nightAnimator;
 
+    [Header("Dead")]
+    [SerializeField] Shake shake;
+    [SerializeField] float deaingTime;
+    [SerializeField] private GameObject deathScroomDay;
+    [SerializeField] private GameObject deathScroomNight;
 
     // Start is called before the first frame update
     private void Start()
@@ -180,6 +185,20 @@ public class PlayerControl : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Dead")
+        {
+            Time.timeScale = deaingTime;
+            shake.start = true;
+            dayAnimator.SetTrigger("Deaing");
+            nightAnimator.SetTrigger("Deaing");
+            moveSpeed = 0f;
+            jumping = false;
+            StartCoroutine(DeaingTimer());
+        }
+    }
+
     private IEnumerator DayTime()
     {
         yield return new WaitForSeconds(cycleTime);
@@ -192,6 +211,20 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(cycleTime);
         day = true;
         night = false;
+    }
+
+    private IEnumerator DeaingTimer()
+    {
+        yield return new WaitForSeconds(deaingTime);
+        if (night == false)
+        {
+            deathScroomDay.SetActive(true);
+        }
+
+        if (day == false)
+        {
+            deathScroomNight.SetActive(true);
+        }
     }
 
 }

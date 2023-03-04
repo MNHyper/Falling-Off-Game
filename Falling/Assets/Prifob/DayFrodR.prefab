@@ -64,9 +64,9 @@ GameObject:
   - component: {fileID: 4717519042756385198}
   - component: {fileID: 4717519042756385197}
   - component: {fileID: 4717519042756385196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Day
-  m_TagString: Untagged
+  m_TagString: Dead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  onWallTime: 1
+  onWallTime: 0.2
   rb: {fileID: 3924623064958971651}
   wallCheckPos: {fileID: 4717519043369898308}
   wallLayer:
