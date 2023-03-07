@@ -9,6 +9,7 @@ public class JumpSpawner : MonoBehaviour
     [SerializeField] private float maxSpawnTime;
     [SerializeField] private float minSpeedUp;
     [SerializeField] private float maxSpeedUp;
+    [SerializeField] private GameObject spawner;
     public float minLimit;
     public float maxLimit;
     private float TimeToSpawn;
@@ -36,6 +37,12 @@ public class JumpSpawner : MonoBehaviour
             var block = Instantiate(ObjectPrefabs[random], transform.position, transform.rotation);
             block.GetComponent<JumpEnemy>().player = player;
         }
+
+        if (player.dead == true)
+        {
+            spawner.SetActive(false);
+        }
+
     }
 }
 

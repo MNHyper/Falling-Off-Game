@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float maxSpawnTime;
     [SerializeField] private float minSpeedUp;
     [SerializeField] private float maxSpeedUp;
+    [SerializeField] private GameObject spawner;
     public float minLimit;
     public float maxLimit;
     private float TimeToSpawn;
@@ -37,5 +38,11 @@ public class Spawner : MonoBehaviour
             var block = Instantiate(ObjectPrefabs[random], transform.position, transform.rotation);
             block.GetComponent<objectScript>().player = player;
         }
+
+        if(player.dead == true)
+        {
+            spawner.SetActive(false);
+        }
+
     }
 }

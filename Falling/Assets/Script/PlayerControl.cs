@@ -46,6 +46,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float deaingTime;
     [SerializeField] private GameObject deathScroomDay;
     [SerializeField] private GameObject deathScroomNight;
+    public bool dead = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -191,10 +192,12 @@ public class PlayerControl : MonoBehaviour
         {
             Time.timeScale = deaingTime;
             shake.start = true;
-            dayAnimator.SetTrigger("Deaing");
-            nightAnimator.SetTrigger("Deaing");
+            dayAnimator.SetBool("Deaing", true);
+            nightAnimator.SetBool("Deaing", true);
             moveSpeed = 0f;
+            dayCycle = false;
             jumping = false;
+            dead = true;
             StartCoroutine(DeaingTimer());
         }
     }
@@ -219,11 +222,15 @@ public class PlayerControl : MonoBehaviour
         if (night == false)
         {
             deathScroomDay.SetActive(true);
+            dayAnimator.SetBool("Deaing", false);
+            nightAnimator.SetBool("Deaing", false);
         }
 
         if (day == false)
         {
             deathScroomNight.SetActive(true);
+            dayAnimator.SetBool("Deaing", false);
+            nightAnimator.SetBool("Deaing", false);
         }
     }
 
