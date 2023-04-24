@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3329373956668263306}
   m_Layer: 6
   m_Name: day
-  m_TagString: DayBlock
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 491327596233019953}
   m_Layer: 6
   m_Name: night
-  m_TagString: DayBlock
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
