@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  onWallTime: 0.3
+  onWallTime: 2
   rb: {fileID: 2896074314302476121}
   wallCheckPos: {fileID: 2896074313805019004}
   wallLayer:
