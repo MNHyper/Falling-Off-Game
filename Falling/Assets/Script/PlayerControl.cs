@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -51,6 +50,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject deathScroomDay;
     [SerializeField] private GameObject deathScroomNight;
     public bool dead = false;
+    private Vector2 mouseClickPosition;
+    public float TimeForTap;
+    public float TimeForSlide;
+    public float DistanceForTap;
+    public float DistanceForSlide;
+    private float clickTimer;
+    private float slideTimer;
 
     // Start is called before the first frame update
     private void Start()
@@ -70,6 +76,34 @@ public class PlayerControl : MonoBehaviour
         }
         dayAnimator.SetBool("Grounded", grounded);
         nightAnimator.SetBool("Grounded", grounded);
+
+        if (dead) return;
+
+        clickTimer -= Time.deltaTime;
+        slideTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0))
+        {
+            clickTimer = TimeForTap;
+            slideTimer = TimeForSlide;
+            mouseClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        if(Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
+        {
+            var newMousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            if (clickTimer > 0 && Vector2.Distance(mouseClickPosition, newMousePos) < DistanceForTap)
+            {
+                OnDayNight();
+            }
+            else if (slideTimer > 0 && Vector2.Distance(mouseClickPosition, newMousePos) > DistanceForSlide)
+            {
+                if(IsDirectionUpward(mouseClickPosition, newMousePos))
+                OnJump();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            OnJump();
+        }
     }
 
     private void FixedUpdate()
@@ -80,11 +114,9 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void OnDayNight(InputValue value)
+    private void OnDayNight()
     {
-        dayCycle = value.isPressed;
-
-        if (dayCycle && night == false)
+        if (night == false)
         {
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
@@ -100,7 +132,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(DayTime());
         }
 
-        if (dayCycle && day == false)
+        if (day == false)
         {
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
@@ -122,50 +154,50 @@ public class PlayerControl : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
 
-    private void OnJump(InputValue value)
+    private void OnJump()
     {
-        jumping = value.isPressed;
 
-        if (grounded && !jumping)
+        if (grounded)
         {
             doubleJump = false;
         }
+        if (doubleJump) return;
 
-        jumping = value.isPressed;
-
-        if (jumping)
+        if (grounded)
         {
             dayAnimator.SetTrigger("Jump");
             nightAnimator.SetTrigger("Jump");
-            if (grounded || doubleJump)
-            {
-                jumpBufferCounter = jumpBufferTime;
-
-                doubleJump = !doubleJump;
-                dayAnimator.SetTrigger("Doble Jump");
-                nightAnimator.SetTrigger("Doble Jump");
-            }
-
-            //animator.SetBool("Jumping", true);
-            //FindObjectOfType<AudioManager>().Play("Jump");
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            dayAnimator.Play("DC Doble Jump");
+            nightAnimator.Play("NC Doble Jump");
+            doubleJump = true;
         }
 
 
-        if (jumpBufferCounter > 0f || doubleJump)
-        {
-            rb.velocity += new Vector2(forwordPower, jumpPower);
+        rb.velocity += new Vector2(forwordPower, jumpPower);
 
-            jumpBufferCounter = 0f;
-        }
 
-        if (!jumping && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+        //animator.SetBool("Jumping", true);
+        //FindObjectOfType<AudioManager>().Play("Jump");
+
+
+        /*   jumpBufferCounter -= Time.deltaTime;
+
+
+
+           if (jumpBufferCounter > 0f || doubleJump)
+           {
+               rb.velocity += new Vector2(forwordPower, jumpPower);
+
+               jumpBufferCounter = 0f;
+           }
+
+           if (!jumping && rb.velocity.y > 0f)
+           {
+               rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+           }*/
 
     }
 
@@ -244,6 +276,13 @@ public class PlayerControl : MonoBehaviour
             dayAnimator.SetBool("Deaing", false);
             nightAnimator.SetBool("Deaing", false);
         }
+    }
+    public bool IsDirectionUpward(Vector2 from, Vector2 to, float offsetAngle = 45f)
+    {
+        Vector2 direction = (to - from).normalized;
+        float angleToUp = Vector2.Angle(direction, Vector2.up);
+
+        return angleToUp <= offsetAngle;
     }
 
 }

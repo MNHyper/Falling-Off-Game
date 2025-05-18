@@ -39,7 +39,7 @@
                 {
                     "name": "",
                     "id": "b806323d-c71e-46b6-b742-72c40963dd5b",
-                    "path": "<Touchscreen>/primaryTouch/delta/up",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
@@ -61,10 +61,10 @@
                 {
                     "name": "",
                     "id": "202c7c0a-140a-447a-a096-24eb2704fd06",
-                    "path": "<Touchscreen>/primaryTouch/delta/down",
-                    "interactions": "",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "",
                     "action": "DayNight",
                     "isComposite": false,
                     "isPartOfComposite": false
