@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    AudioManager audioManager;
     public Transform groundCheck;
     public LayerMask groundLayer;
 
@@ -40,6 +41,7 @@ public class PlayerControl : MonoBehaviour
     public bool day;
     public bool night;
 
+
     [Header("Animator")]
     [SerializeField] private Animator dayAnimator;
     [SerializeField] private Animator nightAnimator;
@@ -57,6 +59,11 @@ public class PlayerControl : MonoBehaviour
     public float DistanceForSlide;
     private float clickTimer;
     private float slideTimer;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -118,6 +125,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (night == false)
         {
+            audioManager.PlaySFX(audioManager.day_night);
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
             dayTimer.SetActive(true);
@@ -134,6 +142,7 @@ public class PlayerControl : MonoBehaviour
 
         if (day == false)
         {
+            audioManager.PlaySFX(audioManager.day_night);
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
             dayTimer.SetActive(false);
@@ -156,7 +165,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnJump()
     {
-
+        audioManager.PlaySFX(audioManager.jump);
         if (grounded)
         {
             doubleJump = false;
@@ -243,6 +252,7 @@ public class PlayerControl : MonoBehaviour
             jumping = false;
             dead = true;
             StartCoroutine(DeaingTimer());
+            audioManager.PlaySFX(audioManager.death);
         }
     }
 
