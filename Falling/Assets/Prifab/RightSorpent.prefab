@@ -651,5 +651,5 @@ MonoBehaviour:
   player: {fileID: 0}
   dayTime: {fileID: 3622911606206794945}
   nightTime: {fileID: 5422103252256322411}
-  minSpeed: 0
-  maxSppeed: 0
+  minSpeed: 4
+  maxSppeed: 5
