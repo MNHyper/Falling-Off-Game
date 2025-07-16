@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -30,8 +32,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject nightPlayer;
     [SerializeField] private GameObject dayBackRound;
     [SerializeField] private GameObject nightBackRound;
-    [SerializeField] private GameObject dayTimer;
-    [SerializeField] private GameObject NightTimer;
+    [SerializeField] private TMP_Text dayScoreText;
+    [SerializeField] private TMP_Text nightScoreText;
 
     [SerializeField] private float cycleTime;
     private bool dayCycle;
@@ -57,9 +59,18 @@ public class PlayerControl : MonoBehaviour
     private float clickTimer;
     private float slideTimer;
 
+    private float Score;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    private void UpdateScore()
+    {
+        Score += Time.deltaTime;
+
+        dayScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
+        nightScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
     }
 
     // Start is called before the first frame update
@@ -83,6 +94,7 @@ public class PlayerControl : MonoBehaviour
 
         if (dead) return;
 
+        UpdateScore();
         clickTimer -= Time.deltaTime;
         slideTimer -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0))
@@ -123,12 +135,13 @@ public class PlayerControl : MonoBehaviour
         if (night == false)
         {
             audioManager.PlaySFX(audioManager.day_night);
+
+            dayScoreText.gameObject.SetActive(true);
+            nightScoreText.gameObject.SetActive(false);
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
-            dayTimer.SetActive(true);
             nightPlayer.SetActive(false);
             nightBackRound.SetActive(false);
-            NightTimer.SetActive(false);
 
 
             StartCoroutine(DayTime());
@@ -136,14 +149,14 @@ public class PlayerControl : MonoBehaviour
 
         if (day == false)
         {
+            dayScoreText.gameObject.SetActive(false);
+            nightScoreText.gameObject.SetActive(true);
             audioManager.PlaySFX(audioManager.day_night);
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
-            dayTimer.SetActive(false);
 
             nightPlayer.SetActive(true);
             nightBackRound.SetActive(true);
-            NightTimer.SetActive(true);
 
 
             StartCoroutine(NightTime());
