@@ -32,10 +32,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject nightBackRound;
     [SerializeField] private GameObject dayTimer;
     [SerializeField] private GameObject NightTimer;
-    [SerializeField] private GameObject dayJumpB;
-    [SerializeField] private GameObject NightJumpB;
-    [SerializeField] private GameObject dayCycleB;
-    [SerializeField] private GameObject NightCycleB;
+
     [SerializeField] private float cycleTime;
     private bool dayCycle;
     public bool day;
@@ -129,13 +126,10 @@ public class PlayerControl : MonoBehaviour
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
             dayTimer.SetActive(true);
-            dayJumpB.SetActive(true);
-            dayCycleB.SetActive(true);
             nightPlayer.SetActive(false);
             nightBackRound.SetActive(false);
             NightTimer.SetActive(false);
-            NightJumpB.SetActive(false);
-            NightCycleB.SetActive(false);
+
 
             StartCoroutine(DayTime());
         }
@@ -146,13 +140,11 @@ public class PlayerControl : MonoBehaviour
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
             dayTimer.SetActive(false);
-            dayJumpB.SetActive(false);
-            dayCycleB.SetActive(false);
+
             nightPlayer.SetActive(true);
             nightBackRound.SetActive(true);
             NightTimer.SetActive(true);
-            NightJumpB.SetActive(true);
-            NightCycleB.SetActive(true);
+
 
             StartCoroutine(NightTime());
         }
