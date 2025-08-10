@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerControl : MonoBehaviour
@@ -60,14 +61,28 @@ public class PlayerControl : MonoBehaviour
     private float slideTimer;
 
     private float Score;
+    [SerializeField] GameObject m_ObstaclesSpawner;
+    private bool m_OnTutorial = true;
+    private bool m_TutorialJump;
+    private bool m_TutorialDayNight;
+
+    [SerializeField] Animator m_DayTutorial;
+    [SerializeField] Animator m_NightTutorial;
+    [SerializeField] float StartSpeed;
+    [SerializeField] float SpeedGrowOverTime;
+    [SerializeField] float MaxSpeed;
+    public static float Speed;
 
     private void Awake()
     {
+        Speed = StartSpeed;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     private void UpdateScore()
     {
-        Score += Time.deltaTime;
+        if (m_OnTutorial) return;
+
+        Score += Time.deltaTime * Speed;
 
         dayScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
         nightScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
@@ -79,12 +94,69 @@ public class PlayerControl : MonoBehaviour
         mustPatrol = true;
         day = false;
         night = true;
-    }
 
+        m_OnTutorial = 0 == PlayerPrefs.GetInt("Tutorial", 0);
+
+        if (!m_OnTutorial)
+        {
+            m_ObstaclesSpawner.SetActive(true);
+            m_TutorialDayNight = true;
+            m_TutorialJump = true;
+            m_DayTutorial.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            dayScoreText.gameObject.SetActive(false);
+            nightScoreText.gameObject.SetActive(false);
+
+            m_NightTutorial.gameObject.SetActive(true);
+        }
+    }
+    [ContextMenu("Reset Tutorial")]
+    public void ResetTutorial()
+    {
+        PlayerPrefs.SetInt("Tutorial", 0);
+    }
     // Update is called once per frame
     private void Update()
     {
-        IsGrounded();
+        if (m_OnTutorial)
+        {
+            if (m_TutorialDayNight && m_TutorialJump)
+            {
+                m_OnTutorial = false;
+                m_ObstaclesSpawner.SetActive(true);
+
+                dayScoreText.gameObject.SetActive(true);
+                nightScoreText.gameObject.SetActive(true);
+                m_DayTutorial.transform.parent.gameObject.SetActive(false);
+
+                if(night)
+                {
+                    nightScoreText.gameObject.SetActive(false);
+                    dayScoreText.gameObject.SetActive(true);
+                }   
+                else
+                {
+                    dayScoreText.gameObject.SetActive(false);
+                    nightScoreText.gameObject.SetActive(true);
+                }
+                PlayerPrefs.SetInt("Tutorial", 1);
+            }
+        }
+        else
+        {
+            if (Speed < MaxSpeed)
+            {
+                Speed += Time.deltaTime * SpeedGrowOverTime;
+            }
+            else
+            {
+                Speed = MaxSpeed;
+            }
+        }
+
+            IsGrounded();
         if (mustPatrol)
         {
             Patrol();
@@ -103,7 +175,7 @@ public class PlayerControl : MonoBehaviour
             slideTimer = TimeForSlide;
             mouseClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
-        if(Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
         {
             var newMousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             if (clickTimer > 0 && Vector2.Distance(mouseClickPosition, newMousePos) < DistanceForTap)
@@ -112,11 +184,11 @@ public class PlayerControl : MonoBehaviour
             }
             else if (slideTimer > 0 && Vector2.Distance(mouseClickPosition, newMousePos) > DistanceForSlide)
             {
-                if(IsDirectionUpward(mouseClickPosition, newMousePos))
-                OnJump();
+                if (IsDirectionUpward(mouseClickPosition, newMousePos))
+                    OnJump();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJump();
         }
@@ -132,16 +204,23 @@ public class PlayerControl : MonoBehaviour
 
     private void OnDayNight()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (night == false)
         {
             audioManager.PlaySFX(audioManager.day_night);
 
-            dayScoreText.gameObject.SetActive(true);
-            nightScoreText.gameObject.SetActive(false);
+            if (!m_OnTutorial)
+            {
+                dayScoreText.gameObject.SetActive(true);
+                nightScoreText.gameObject.SetActive(false);
+            }
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
             nightPlayer.SetActive(false);
             nightBackRound.SetActive(false);
+
+            m_DayTutorial.gameObject.SetActive(false);
+            m_NightTutorial.gameObject.SetActive(true);
 
 
             StartCoroutine(DayTime());
@@ -149,8 +228,11 @@ public class PlayerControl : MonoBehaviour
 
         if (day == false)
         {
-            dayScoreText.gameObject.SetActive(false);
-            nightScoreText.gameObject.SetActive(true);
+            if (!m_OnTutorial)
+            {
+                dayScoreText.gameObject.SetActive(false);
+                nightScoreText.gameObject.SetActive(true);
+            }
             audioManager.PlaySFX(audioManager.day_night);
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
@@ -158,9 +240,22 @@ public class PlayerControl : MonoBehaviour
             nightPlayer.SetActive(true);
             nightBackRound.SetActive(true);
 
+            m_DayTutorial.gameObject.SetActive(true);
+            m_NightTutorial.gameObject.SetActive(false);
 
             StartCoroutine(NightTime());
         }
+
+        m_TutorialDayNight = true;
+        if (m_DayTutorial.gameObject.activeSelf)
+        {
+            m_DayTutorial.SetBool("Jump", true);
+        }
+        if (m_NightTutorial.gameObject.activeSelf)
+        {
+            m_NightTutorial.SetBool("Jump", true);
+        }
+
     }
 
     private void IsGrounded()
@@ -170,13 +265,15 @@ public class PlayerControl : MonoBehaviour
 
     private void OnJump()
     {
-        audioManager.PlaySFX(audioManager.jump);
+        if (!m_TutorialDayNight) return;
+
         if (grounded)
         {
             doubleJump = false;
         }
         if (doubleJump) return;
 
+        audioManager.PlaySFX(audioManager.jump);
         if (grounded)
         {
             dayAnimator.SetTrigger("Jump");
@@ -187,6 +284,7 @@ public class PlayerControl : MonoBehaviour
             dayAnimator.Play("DC Doble Jump");
             nightAnimator.Play("NC Doble Jump");
             doubleJump = true;
+            m_TutorialJump = true;
         }
 
 
@@ -258,6 +356,8 @@ public class PlayerControl : MonoBehaviour
             dead = true;
             StartCoroutine(DeaingTimer());
             audioManager.PlaySFX(audioManager.death);
+            audioManager.StopMusic();
+            PlayerPrefs.SetInt("Score", Mathf.RoundToInt(Score));
         }
     }
 

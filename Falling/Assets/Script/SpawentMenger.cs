@@ -12,12 +12,12 @@ public class SpawentMenger : MonoBehaviour
 
     private void Start()
     {
+        spawneTime = Random.Range(spawneTimeMin, spawneTimeMax);
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawneTime = Random.Range(spawneTimeMin, spawneTimeMax);
         if (spawneTime < Time.timeSinceLevelLoad)
         {
             ActiveSpawners(spawners);

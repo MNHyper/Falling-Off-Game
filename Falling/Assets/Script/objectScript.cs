@@ -7,14 +7,11 @@ public class objectScript : MonoBehaviour
     public PlayerControl player;
     [SerializeField] GameObject dayTime;
     [SerializeField] GameObject nightTime;
-    [SerializeField] private float minSpeed;
-    [SerializeField] private float maxSppeed;
-    private float speed;
+
 
     private void Update()
     {
-        speed = Random.Range(minSpeed, maxSppeed);
-        transform.position += transform.up * speed * Time.deltaTime;
+        transform.position += transform.up * PlayerControl.Speed * Time.deltaTime;
         Cycle();
         if (transform.position.y >= 8.55)
         {
