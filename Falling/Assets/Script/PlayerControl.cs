@@ -35,6 +35,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject nightBackRound;
     [SerializeField] private TMP_Text dayScoreText;
     [SerializeField] private TMP_Text nightScoreText;
+    [SerializeField] private GameObject dayAudioText;
+    [SerializeField] private GameObject nightAudioText;
 
     [SerializeField] private float cycleTime;
     private bool dayCycle;
@@ -84,8 +86,8 @@ public class PlayerControl : MonoBehaviour
 
         Score += Time.deltaTime * Speed;
 
-        dayScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
-        nightScoreText.text = $"Score: {Mathf.RoundToInt(Score)}";
+        dayScoreText.text = $"            : {Mathf.RoundToInt(Score)}";
+        nightScoreText.text = $"            : {Mathf.RoundToInt(Score)}";
     }
 
     // Start is called before the first frame update
@@ -214,10 +216,12 @@ public class PlayerControl : MonoBehaviour
                 dayScoreText.gameObject.SetActive(true);
                 nightScoreText.gameObject.SetActive(false);
             }
+            dayAudioText.SetActive(true);
             dayPlayer.SetActive(true);
             dayBackRound.SetActive(true);
             nightPlayer.SetActive(false);
             nightBackRound.SetActive(false);
+            nightAudioText.SetActive(false);
 
             m_DayTutorial.gameObject.SetActive(false);
             m_NightTutorial.gameObject.SetActive(true);
@@ -236,10 +240,10 @@ public class PlayerControl : MonoBehaviour
             audioManager.PlaySFX(audioManager.day_night);
             dayPlayer.SetActive(false);
             dayBackRound.SetActive(false);
-
+            nightAudioText.SetActive(true);
             nightPlayer.SetActive(true);
             nightBackRound.SetActive(true);
-
+            dayAudioText.SetActive(false);
             m_DayTutorial.gameObject.SetActive(true);
             m_NightTutorial.gameObject.SetActive(false);
 
@@ -357,7 +361,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(DeaingTimer());
             audioManager.PlaySFX(audioManager.death);
             audioManager.StopMusic();
-            PlayerPrefs.SetInt("Score", Mathf.RoundToInt(Score));
+            PlayerPrefs.SetInt("         ", Mathf.RoundToInt(Score));
         }
     }
 
