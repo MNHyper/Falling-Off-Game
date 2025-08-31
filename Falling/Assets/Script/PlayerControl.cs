@@ -86,8 +86,8 @@ public class PlayerControl : MonoBehaviour
 
         Score += Time.deltaTime * Speed;
 
-        dayScoreText.text = $"            : {Mathf.RoundToInt(Score)}";
-        nightScoreText.text = $"            : {Mathf.RoundToInt(Score)}";
+        dayScoreText.text = $"             :{Mathf.RoundToInt(Score)}";
+        nightScoreText.text = $"             :{Mathf.RoundToInt(Score)}";
     }
 
     // Start is called before the first frame update
