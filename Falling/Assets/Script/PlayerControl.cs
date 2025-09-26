@@ -86,8 +86,8 @@ public class PlayerControl : MonoBehaviour
 
         Score += Time.deltaTime * Speed;
 
-        dayScoreText.text = $"             :{Mathf.RoundToInt(Score)}";
-        nightScoreText.text = $"             :{Mathf.RoundToInt(Score)}";
+        dayScoreText.text = $":{Mathf.RoundToInt(Score)}";
+        nightScoreText.text = $":{Mathf.RoundToInt(Score)}";
     }
 
     // Start is called before the first frame update
@@ -118,6 +118,11 @@ public class PlayerControl : MonoBehaviour
     public void ResetTutorial()
     {
         PlayerPrefs.SetInt("Tutorial", 0);
+    }
+    [ContextMenu("Reset Score")]
+    public void ResetScore()
+    {
+        PlayerPrefs.SetInt("Score", 0);
     }
     // Update is called once per frame
     private void Update()
@@ -361,7 +366,11 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(DeaingTimer());
             audioManager.PlaySFX(audioManager.death);
             audioManager.StopMusic();
-            PlayerPrefs.SetInt("         ", Mathf.RoundToInt(Score));
+            var score = PlayerPrefs.GetInt("Score", 0);
+            if (Score > score)
+            {
+                PlayerPrefs.SetInt("Score", Mathf.RoundToInt(Score));
+            }
         }
     }
 
