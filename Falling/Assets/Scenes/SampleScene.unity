@@ -1159,7 +1159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 468736338}
   - component: {fileID: 468736337}
-  - component: {fileID: 468736336}
   m_Layer: 0
   m_Name: Adds
   m_TagString: Untagged
@@ -1167,18 +1166,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &468736336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468736335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23c2853fbf40264886a78a9a9e3d646, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &468736337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6306,6 +6293,7 @@ MonoBehaviour:
   nightScoreText: {fileID: 575157217}
   dayAudioText: {fileID: 1222811504}
   nightAudioText: {fileID: 667192162}
+  GoogleAdds: {fileID: 468736337}
   cycleTime: 0.1
   day: 0
   night: 1
@@ -6326,6 +6314,7 @@ MonoBehaviour:
   StartSpeed: 1
   SpeedGrowOverTime: 0.1
   MaxSpeed: 12
+  TimeToAdds: 2
 --- !u!1001 &4218683093499191917
 PrefabInstance:
   m_ObjectHideFlags: 0

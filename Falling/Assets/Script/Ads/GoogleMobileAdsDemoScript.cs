@@ -8,13 +8,18 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
 {
 #if UNITY_ANDROID
     private const string AD_UNIT_ID = "ca-app-pub-4600640691459471/9556554997";
+    private const string AD_UNIT_LOSE_ID = "ca-app-pub-4600640691459471/5385548106";
 #elif UNITY_IPHONE
-        private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/2934735716";
+    private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/2934735716";
+    private const string AD_UNIT_LOSE_ID = "ca-app-pub-3940256099942544/4411468910";
 #else
-        private const string AD_UNIT_ID = "unused";
+    private const string AD_UNIT_ID = "unused";
+    private const string AD_UNIT_LOSE_ID = "unused";
 #endif
 
     private BannerView bannerView;
+    private InterstitialAd interstitialAd;
+
     public void Start()
     {
         // Initialize Google Mobile Ads SDK.
@@ -22,6 +27,7 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
         {
             CreateBannerView();
             LoadBannerView();
+            LoadInterstitialAd();
         });
     }
 
@@ -33,40 +39,6 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
         // [END create_banner_view]
     }
 
-    private void CreateBannerViewWithCustomPostition()
-    {
-        // [START create_banner_view_position]
-        // Create a 320x50 banner views at coordinate (0,50) on screen.
-        bannerView = new BannerView(AD_UNIT_ID, AdSize.Banner, 0, 50);
-        // [END create_banner_view_position]
-    }
-
-    private void CreateBannerViewWithCustomSize()
-    {
-        // [START create_banner_view_size]
-        // Create a 250x250 banner at the bottom of the screen.
-        AdSize adSize = new AdSize(250, 250);
-        bannerView = new BannerView(AD_UNIT_ID, adSize, AdPosition.Bottom);
-        // [END create_banner_view_size]
-    }
-
-    private void CreateAdManagerBannerViewWithCustomSizes(
-        AdManagerBannerView adManagerBannerView)
-    {
-        // [START create_ad_manager_banner_view_sizes]
-        // Create a 250x250 banner at the bottom of the screen.
-        adManagerBannerView = new AdManagerBannerView(AD_UNIT_ID, AdSize.Banner, AdPosition.Top);
-
-        // Add multiple ad sizes.
-        adManagerBannerView.ValidAdSizes = new List<AdSize>
-            {
-                AdSize.Banner,
-                new AdSize(120, 20),
-                new AdSize(250, 250),
-            };
-        // [END create_ad_manager_banner_view_sizes]
-    }
-
     private void LoadBannerView()
     {
         // [START load_banner_view]
@@ -75,38 +47,99 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
         // [END load_banner_view]
     }
 
-    private void ListenToBannerViewEvents()
+    private void LoadInterstitialAd()
     {
-        // [START listen_to_events]
-        bannerView.OnBannerAdLoaded += () =>
+        // [START load_interstitial_ad]
+        // Clean up the old ad before loading a new one.
+        if (interstitialAd != null)
         {
-            // Raised when an ad is loaded into the banner view.
-        };
-        bannerView.OnBannerAdLoadFailed += (LoadAdError error) =>
+            interstitialAd.Destroy();
+            interstitialAd = null;
+        }
+
+        Debug.Log("Loading the interstitial ad.");
+
+        // Create our request used to load the ad.
+        var adRequest = new AdRequest();
+
+        // Send the request to load the ad.
+        InterstitialAd.Load(AD_UNIT_LOSE_ID, adRequest,
+            (InterstitialAd ad, LoadAdError error) =>
+            {
+                // If error is not null, the load request failed.
+                if (error != null || ad == null)
+                {
+                    Debug.LogError("interstitial ad failed to load an ad " +
+                                   "with error : " + error);
+                    return;
+                }
+
+                Debug.Log("Interstitial ad loaded with response : "
+                          + ad.GetResponseInfo());
+
+                interstitialAd = ad;
+                RegisterEventHandlers(interstitialAd);
+            });
+        // [END load_interstitial_ad]
+    }
+
+    private void RegisterEventHandlers(InterstitialAd interstitialAd)
+    {
+        // Raised when the ad is estimated to have earned money.
+        interstitialAd.OnAdPaid += (AdValue adValue) =>
         {
-            // Raised when an ad fails to load into the banner view.
+            Debug.Log(System.String.Format("Interstitial ad paid {0} {1}.",
+                adValue.Value,
+                adValue.CurrencyCode));
         };
-        bannerView.OnAdPaid += (AdValue adValue) =>
+        // Raised when an impression is recorded for an ad.
+        interstitialAd.OnAdImpressionRecorded += () =>
         {
-            // Raised when the ad is estimated to have earned money.
+            Debug.Log("Interstitial ad recorded an impression.");
         };
-        bannerView.OnAdImpressionRecorded += () =>
+        // Raised when a click is recorded for an ad.
+        interstitialAd.OnAdClicked += () =>
         {
-            // Raised when an impression is recorded for an ad.
+            Debug.Log("Interstitial ad was clicked.");
         };
-        bannerView.OnAdClicked += () =>
+        // Raised when an ad opened full screen content.
+        interstitialAd.OnAdFullScreenContentOpened += () =>
         {
-            // Raised when a click is recorded for an ad.
+            Debug.Log("Interstitial ad full screen content opened.");
         };
-        bannerView.OnAdFullScreenContentOpened += () =>
+        // Raised when the ad closed full screen content.
+        interstitialAd.OnAdFullScreenContentClosed += () =>
         {
-            // Raised when an ad opened full screen content.
+            Debug.Log("Interstitial ad full screen content closed.");
+            // Reload the ad so that we can show another as soon as possible.
+            LoadInterstitialAd();
         };
-        bannerView.OnAdFullScreenContentClosed += () =>
+        // Raised when the ad failed to open full screen content.
+        interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
-            // Raised when the ad closed full screen content.
+            Debug.LogError("Interstitial ad failed to open full screen content " +
+                           "with error : " + error);
+            // Reload the ad so that we can show another as soon as possible.
+            LoadInterstitialAd();
         };
-        // [END listen_to_events]
+    }
+
+    /// <summary>
+    /// Call this function when the player loses to show a fullscreen interstitial ad
+    /// </summary>
+    public void ShowLoseAd()
+    {
+        if (interstitialAd != null && interstitialAd.CanShowAd())
+        {
+            Debug.Log("Showing interstitial ad.");
+            interstitialAd.Show();
+        }
+        else
+        {
+            Debug.LogError("Interstitial ad is not ready yet.");
+            // Optionally reload the ad
+            LoadInterstitialAd();
+        }
     }
 
     private void DestroyBannerView()
@@ -119,5 +152,21 @@ public class GoogleMobileAdsDemoScript : MonoBehaviour
             bannerView = null;
         }
         // [END destroy_banner_view]
+    }
+
+    private void DestroyInterstitialAd()
+    {
+        if (interstitialAd != null)
+        {
+            Debug.Log("Destroying interstitial ad.");
+            interstitialAd.Destroy();
+            interstitialAd = null;
+        }
+    }
+
+    public void OnDestroy()
+    {
+        DestroyBannerView();
+        DestroyInterstitialAd();
     }
 }

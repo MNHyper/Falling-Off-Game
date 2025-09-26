@@ -37,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private TMP_Text nightScoreText;
     [SerializeField] private GameObject dayAudioText;
     [SerializeField] private GameObject nightAudioText;
+    [SerializeField] private GoogleMobileAdsDemoScript GoogleAdds;
 
     [SerializeField] private float cycleTime;
     private bool dayCycle;
@@ -74,6 +75,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float SpeedGrowOverTime;
     [SerializeField] float MaxSpeed;
     public static float Speed;
+    public static int AddIndex;
+    [SerializeField] private int TimeToAdds;
+    private bool m_Lose;
 
     private void Awake()
     {
@@ -353,6 +357,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (m_Lose) return;
         if (collision.tag == "Dead")
         {
             Time.timeScale = deaingTime;
@@ -371,6 +376,13 @@ public class PlayerControl : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Score", Mathf.RoundToInt(Score));
             }
+            AddIndex++;
+            if (AddIndex >= TimeToAdds)
+            {
+                GoogleAdds.ShowLoseAd();
+                AddIndex = 0;
+            }
+            m_Lose = true;
         }
     }
 
