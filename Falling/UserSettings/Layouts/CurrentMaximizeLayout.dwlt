@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 832
+  controlID: 1082
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 833
+  controlID: 1083
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 834
+  controlID: 1084
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -240,8 +240,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: be900000
-      m_LastClickedID: 37054
+      m_SelectedIDs: 
+      m_LastClickedID: 0
       m_ExpandedIDs: 4ef2ffff1afbffff307d0000827d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 976.4074, y: 1489.0519, z: 4.844392}
     speed: 2
-    m_Value: {x: 976.4074, y: 1489.0519, z: 4.844392}
+    m_Value: {x: -18.581104, y: -7.1949205, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 859.93384
     speed: 2
-    m_Value: 859.93384
+    m_Value: 0.5578457
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 739
+  controlID: 989
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -1176,7 +1176,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Font
+    - Assets/Prifab
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1184,15 +1184,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 74
   m_LastFolders:
-  - Assets/Font
+  - Assets/Prifab
   m_LastFoldersGridSize: 74
   m_LastProjectPath: C:\Users\Dord\Desktop\falling\Falling-Off-Game\Falling
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6a780000
-    m_LastClickedID: 30826
+    m_SelectedIDs: 38780000
+    m_LastClickedID: 30776
     m_ExpandedIDs: 000000001a78000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1246,9 +1246,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: be900000
-    m_LastClickedInstanceID: 37054
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000a26f00003c7700003477000068a1000002730000c4770000f4770000087800000478000018780000eae0000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
