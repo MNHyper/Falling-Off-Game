@@ -917,7 +917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2095528552}
   minSpawnTime: 1
-  maxSpawnTime: 12
+  maxSpawnTime: 8
   minSpeedUp: -0.005
   maxSpeedUp: -0.005
   spawner: {fileID: 318538351}
@@ -3700,7 +3700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2095528552}
   minSpawnTime: 1
-  maxSpawnTime: 10
+  maxSpawnTime: 8
   minSpeedUp: -0.005
   maxSpeedUp: -0.005
   spawner: {fileID: 1418947987}
@@ -5085,7 +5085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2095528552}
   minSpawnTime: 1
-  maxSpawnTime: 10
+  maxSpawnTime: 8
   minSpeedUp: -0.005
   maxSpeedUp: -0.005
   spawner: {fileID: 1827505789}
