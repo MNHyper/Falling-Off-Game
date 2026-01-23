@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 479995617}
   - component: {fileID: 479995616}
   m_Layer: 5
-  m_Name: MuteImage
+  m_Name: MuteImageD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2693,7 +2693,7 @@ GameObject:
   - component: {fileID: 856444693}
   - component: {fileID: 856444692}
   m_Layer: 5
-  m_Name: MuteSfx (1)
+  m_Name: MuteSfxD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2776,7 +2776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &880108710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3211,8 +3211,10 @@ MonoBehaviour:
   mainmenu: {fileID: 0}
   warning: {fileID: 8300000, guid: 221f930e4fc382043a0d4ea36790544f, type: 3}
   doublejump: {fileID: 8300000, guid: 35faece9f7c9a7e47bc48607fff6806e, type: 3}
-  MuteMusicImage: {fileID: 479995614}
-  MuteSFXImage: {fileID: 856444690}
+  MuteMusicImageD: {fileID: 479995614}
+  MuteSFXImageD: {fileID: 856444690}
+  MuteMusicImageN: {fileID: 1857082101}
+  MuteSFXImageN: {fileID: 1518782842}
 --- !u!1 &1119041181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4187,7 +4189,7 @@ GameObject:
   - component: {fileID: 1518782845}
   - component: {fileID: 1518782844}
   m_Layer: 5
-  m_Name: MuteSfx (1)
+  m_Name: MuteSfxN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5427,7 +5429,7 @@ GameObject:
   - component: {fileID: 1857082104}
   - component: {fileID: 1857082103}
   m_Layer: 5
-  m_Name: MuteImage
+  m_Name: MuteImageN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

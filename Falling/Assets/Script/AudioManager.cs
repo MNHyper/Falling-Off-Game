@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour
     [Header("---------- Audio Source ----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSouecr;
-
+ 
 
     [Header("---------- Audio Clip ----------")]
     public AudioClip button;
@@ -18,8 +18,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip warning;
     public AudioClip doublejump;
 
-    [SerializeField] GameObject MuteMusicImage;
-    [SerializeField] GameObject MuteSFXImage;
+    [SerializeField] GameObject MuteMusicImageD;
+    [SerializeField] GameObject MuteSFXImageD;
+    [SerializeField] GameObject MuteMusicImageN;
+    [SerializeField] GameObject MuteSFXImageN;
 
 
     private void Start()
@@ -31,8 +33,10 @@ public class AudioManager : MonoBehaviour
 
         SFXSouecr.volume = PlayerPrefs.GetFloat("SFX", 1);
         musicSource.volume = PlayerPrefs.GetFloat("Music", 1);
-        if (SFXSouecr.volume == 0) MuteSFXImage.SetActive(true);
-        if (musicSource.volume == 0) MuteMusicImage.SetActive(true);
+        if (SFXSouecr.volume == 0) MuteSFXImageD.SetActive(true);
+        if (musicSource.volume == 0) MuteMusicImageD.SetActive(true);
+        if (SFXSouecr.volume == 0) MuteSFXImageN.SetActive(true);
+        if (musicSource.volume == 0) MuteMusicImageN.SetActive(true);
     }
 
     public void PlaySFX(AudioClip clip)
@@ -50,14 +54,16 @@ public class AudioManager : MonoBehaviour
         if(musicSource.volume == 1)
         {
             musicSource.volume = 0;
-            MuteMusicImage.SetActive(true);
+            MuteMusicImageD.SetActive(true);
+            MuteMusicImageN.SetActive(true);
 
-           PlayerPrefs.SetFloat("Music", 0);
+            PlayerPrefs.SetFloat("Music", 0);
         }
         else
         {
             musicSource.volume = 1;
-            MuteMusicImage.SetActive(false);
+            MuteMusicImageD.SetActive(false);
+            MuteMusicImageN.SetActive(false);
 
             PlayerPrefs.SetFloat("Music", 1);
         }
@@ -67,14 +73,16 @@ public class AudioManager : MonoBehaviour
         if(SFXSouecr.volume == 1)
         {
             SFXSouecr.volume = 0;
-            MuteSFXImage.SetActive(true);
+            MuteSFXImageD.SetActive(true);
+            MuteSFXImageN.SetActive(true);
 
             PlayerPrefs.SetFloat("SFX", 0);
         }
         else
         {
             SFXSouecr.volume = 1;
-            MuteSFXImage.SetActive(false);
+            MuteSFXImageD.SetActive(false);
+            MuteSFXImageN.SetActive(false);
 
             PlayerPrefs.SetFloat("SFX", 1);
         }

@@ -7,14 +7,14 @@ using UnityEngine;
 public class GoogleMobileAdsDemoScript : MonoBehaviour
 {
 #if UNITY_ANDROID
-    private const string AD_UNIT_ID = "ca-app-pub-4600640691459471/9556554997";
-    private const string AD_UNIT_LOSE_ID = "ca-app-pub-4600640691459471/5385548106";
+    private const string AD_UNIT_ID = "ca-app-pub-2413838992303643/7685190880";
+    private const string AD_UNIT_LOSE_ID = "ca-app-pub-2413838992303643/9897055719";
 #elif UNITY_IPHONE
-    private const string AD_UNIT_ID = "ca-app-pub-3940256099942544/2934735716";
-    private const string AD_UNIT_LOSE_ID = "ca-app-pub-3940256099942544/4411468910";
+    private const string AD_UNIT_ID = "ca-app-pub-2413838992303643/7685190880";
+    private const string AD_UNIT_LOSE_ID = "ca-app-pub-2413838992303643/9897055719";
 #else
-    private const string AD_UNIT_ID = "unused";
-    private const string AD_UNIT_LOSE_ID = "unused";
+    private const string AD_UNIT_ID = "ca-app-pub-2413838992303643/7685190880";
+    private const string AD_UNIT_LOSE_ID = "ca-app-pub-2413838992303643/9897055719";
 #endif
 
     private BannerView bannerView;
