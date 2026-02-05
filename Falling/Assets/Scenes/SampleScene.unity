@@ -4032,7 +4032,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Change the sky
+  m_text: Touch the screen
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efa871b114b25e345810d277e1be1746, type: 2}
   m_sharedMaterial: {fileID: 6440615935001540434, guid: efa871b114b25e345810d277e1be1746, type: 2}
@@ -4731,7 +4731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Change the sky
+  m_text: Touch the screen
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efa871b114b25e345810d277e1be1746, type: 2}
   m_sharedMaterial: {fileID: 6440615935001540434, guid: efa871b114b25e345810d277e1be1746, type: 2}
@@ -5966,7 +5966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jump
+  m_text: "Slide up to jump \nSlide twice to double jump"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efa871b114b25e345810d277e1be1746, type: 2}
   m_sharedMaterial: {fileID: 6440615935001540434, guid: efa871b114b25e345810d277e1be1746, type: 2}
@@ -7195,7 +7195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jump
+  m_text: "Slide up to jump \nSlide twice to double jump"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efa871b114b25e345810d277e1be1746, type: 2}
   m_sharedMaterial: {fileID: 6440615935001540434, guid: efa871b114b25e345810d277e1be1746, type: 2}
